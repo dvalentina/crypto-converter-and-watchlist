@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+# CryptoRank Test Task
 
-## Getting Started
+This project is a test assignment for Frontend Developer position.
 
-First, run the development server:
+It is deployed to Vercel and is available at https://cryptorank-test-task.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This application accumulates different information about crypto currencies. You can:
+- convert crypto currencies,
+- see current crypto currencies' prices.
+
+## If you want to run this application locally
+
+Clone this repository to your computer.
+
+> If you are not familiar with cloning GitHub repositories, check [GitHub Docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+
+In the Terminal, go to the cloned project directory.
+
+Run following command to install all necessary dependencies:
+
+> If you don't have npm installed on your computer, follow [npm Docs](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) tutorial to install it.
+
+```
+npm i && npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After that, your browser should automatically open a new tab and display the application. If it didn't happen, type
+```
+http://localhost:3000/
+```
+in the address bar of your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You are now ready to explore the application!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tests
 
-## Learn More
+## Task
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Historical price function
+- [ ] Crypto currencies converter page using CryptoRank API
+- [ ] Crypto currencies prices table page using CryptoRank API with pagination
+- [ ] Additional columns with results of historical price function
+- [ ] Test for the function and application
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tools & Technologies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Next.js
+- React
+- TypeScript
+- styled-components
+- SWR
+- Jest
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Some comments about development process 
