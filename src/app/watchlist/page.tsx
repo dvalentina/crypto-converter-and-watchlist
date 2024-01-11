@@ -1,10 +1,10 @@
-import Table from '@/components/Table';
+import CurrenciesTable from '@/components/CurrenciesTable';
 
 function Watchlist() {
   return (
     <>
       <h1>Watchlist</h1>
-      <Table />
+      <CurrenciesTable />
     </>
   );
 }
