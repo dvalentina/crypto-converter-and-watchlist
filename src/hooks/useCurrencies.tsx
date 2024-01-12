@@ -1,11 +1,15 @@
 import useSWR from 'swr';
 
-import { CRYPTORANK_API_URL } from '@/constants';
+import { CRYPTORANK_API_CURRENCIES_LIST } from '@/constants';
 
 interface ICurrencies {
   data: ICurrencyData[];
   status: Object;
-  meta: Object;
+  meta: IMeta;
+}
+
+interface IMeta {
+  count: number;
 }
 
 interface ICurrencyData {
@@ -14,12 +18,10 @@ interface ICurrencyData {
   category: string;
   circulatingSupply: number;
   values: ICurrencyValues;
-  // others
 }
 
 interface ICurrencyValues {
   USD: ICurrencyValue;
-  // others
 }
 
 interface ICurrencyValue {
@@ -27,14 +29,20 @@ interface ICurrencyValue {
   marketCap: number;
   percentChange24h: number;
   percentChange7d: number;
-  // others
 }
 
 const fetcher = (URL: string) => fetch(URL).then((res) => res.json());
 
-function useCurrencies() {
+interface IUseCurrencies {
+  pageIndex: number;
+  limit: number;
+}
+
+function useCurrencies({ pageIndex, limit }: IUseCurrencies) {
+  const offset = limit * (pageIndex - 1);
+
   const { data, error, isLoading } = useSWR<ICurrencies>(
-    CRYPTORANK_API_URL,
+    `${CRYPTORANK_API_CURRENCIES_LIST}&limit=${limit}&offset=${offset}`,
     fetcher
   );
 
