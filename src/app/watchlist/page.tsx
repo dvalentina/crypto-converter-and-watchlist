@@ -1,6 +1,6 @@
 import CurrenciesTable from '@/components/CurrenciesTable';
 
-function Watchlist() {
+function WatchlistPage() {
   return (
     <>
       <h1>Watchlist</h1>
@@ -9,4 +9,4 @@ function Watchlist() {
   );
 }
 
-export default Watchlist;
+export default WatchlistPage;

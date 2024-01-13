@@ -1,5 +1,12 @@
-function Converter() {
-  return <h1>Converter</h1>;
+import Converter from '@/components/Converter';
+
+function ConverterPage() {
+  return (
+    <>
+      <h1>Converter</h1>
+      <Converter />
+    </>
+  );
 }
 
-export default Converter;
+export default ConverterPage;
