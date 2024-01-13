@@ -1,12 +1,28 @@
 'use client';
 
-import { Container, CurrencyList, Input } from './CurrencyCard.styled';
+import { useState } from 'react';
+
+import SearchableDropdown from '@/components/SearchableDropdown';
+
+import { Container, Input } from './CurrencyCard.styled';
+
+const options = ['Bitcoin', 'Uniswap', 'Ethereum'];
 
 function CurrencyCard() {
+  const [selected, setSelected] = useState(options[0]);
+
+  const handleSelect = (option: string) => {
+    setSelected(option);
+  };
+
   return (
     <Container>
       <Input type='number'></Input>
-      <CurrencyList>Bitcoin</CurrencyList>
+      <SearchableDropdown
+        options={options}
+        selected={selected}
+        handleSelect={handleSelect}
+      />
     </Container>
   );
 }
