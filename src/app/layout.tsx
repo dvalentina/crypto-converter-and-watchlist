@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import Header from '../components/Header';
-
-import './globals.css';
+import GlobalStyles from '@/components/GlobalStyles';
+import Grid from '@/components/Grid';
+import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
 
 export const metadata: Metadata = {
   title: 'CryptoRank Test Task',
@@ -17,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <Header />
-        {children}
+        <StyledComponentsRegistry>
+          <GlobalStyles />
+          <Grid>{children}</Grid>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
