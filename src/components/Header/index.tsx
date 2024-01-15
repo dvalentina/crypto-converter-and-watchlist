@@ -1,11 +1,22 @@
-import Link from 'next/link';
+'use client';
+
+import { usePathname } from 'next/navigation';
+
+import { Container, Divider, StyledLink } from './Header.styled';
 
 function Header() {
+  const pathname = usePathname();
+
   return (
-    <>
-      <Link href='/converter'>Converter</Link>
-      <Link href='/watchlist'>Watchlist</Link>
-    </>
+    <Container>
+      <StyledLink href='/converter' chosen={pathname === '/converter'}>
+        Converter
+      </StyledLink>
+      <Divider />
+      <StyledLink href='/watchlist' chosen={pathname === '/watchlist'}>
+        Watchlist
+      </StyledLink>
+    </Container>
   );
 }
 
