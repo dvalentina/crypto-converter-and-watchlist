@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 
+import Pagination from '@/components/Pagination';
 import useCurrencies from '@/hooks/useCurrencies';
 
-import Pagination from '../Pagination';
+import TextSkeleton from '../TextSkeleton';
 
-import { Table } from './CurrenciesTable.styled';
+import { Container, StyledCard, Table, Td, Th } from './CurrenciesTable.styled';
 
 function CurrenciesTable() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -16,10 +17,6 @@ function CurrenciesTable() {
     pageIndex,
     limit,
   });
-
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
 
   if (isError) {
     console.log(isError);
@@ -37,40 +34,51 @@ function CurrenciesTable() {
     setPageIndex(newPageIndex);
   };
 
-  const rows = currencies?.data.map((currency, index) => (
-    <tr key={`currencies row ${index + 1}`}>
-      <td>{currency.name}</td>
-      <td>{currency.circulatingSupply}</td>
-      <td>{currency.category}</td>
-      <td>{currency.values.USD.price}</td>
-      <td>{currency.values.USD.marketCap}</td>
-      <td>{currency.values.USD.percentChange24h}</td>
-      <td>{currency.values.USD.percentChange7d}</td>
-    </tr>
-  ));
+  const skeletonWrap = (text?: string | number) => {
+    return isLoading ? <TextSkeleton /> : text;
+  };
+
+  const rows = Array.from(Array(limit)).map((el, index) => {
+    const currency = currencies?.data[index];
+    const valuesUSD = currency?.values.USD;
+
+    return (
+      <tr key={`currencies row ${index + 1}`}>
+        <Td $align='left'>{skeletonWrap(currency?.name)}</Td>
+        <Td $align='right'>{skeletonWrap(currency?.circulatingSupply)}</Td>
+        <Td $align='left'>{skeletonWrap(currency?.category)}</Td>
+        <Td $align='right'>{skeletonWrap(valuesUSD?.price)}</Td>
+        <Td $align='right'>{skeletonWrap(valuesUSD?.marketCap)}</Td>
+        <Td $align='right'>{skeletonWrap(valuesUSD?.percentChange24h)}</Td>
+        <Td $align='right'>{skeletonWrap(valuesUSD?.percentChange7d)}</Td>
+      </tr>
+    );
+  });
 
   return (
-    <>
-      <Table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Circulating supply</th>
-            <th>Category</th>
-            <th>Price (USD)</th>
-            <th>Market cap</th>
-            <th>% change, 24 hours</th>
-            <th>% change, 7 days</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
+    <Container>
+      <StyledCard>
+        <Table>
+          <thead>
+            <tr>
+              <Th $align='left'>Name</Th>
+              <Th $align='right'>Circulating supply</Th>
+              <Th $align='left'>Category</Th>
+              <Th $align='right'>Price (USD)</Th>
+              <Th $align='right'>Market cap</Th>
+              <Th $align='right'>% change, 24 hours</Th>
+              <Th $align='right'>% change, 7 days</Th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </Table>
+      </StyledCard>
       <Pagination
         handlePageIndexChange={handlePageChange}
         pageIndex={pageIndex}
         maxPageIndex={maxPageIndex}
       />
-    </>
+    </Container>
   );
 }
 

@@ -1,9 +1,8 @@
 'use client';
 
+import Card from '@/components/Card';
 import Input from '@/components/Input';
 import SearchableDropdown from '@/components/SearchableDropdown';
-
-import { Container } from './CurrencyCard.styled';
 
 interface ICurrencyCard {
   options: string[];
@@ -29,7 +28,7 @@ function CurrencyCard({
   };
 
   return (
-    <Container>
+    <Card>
       <Input
         type='number'
         value={value}
@@ -42,7 +41,7 @@ function CurrencyCard({
         selected={selected}
         handleSelect={handleSelect}
       />
-    </Container>
+    </Card>
   );
 }
 

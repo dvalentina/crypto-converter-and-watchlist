@@ -26,7 +26,7 @@ export const BodyGrid = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px;
+  padding: 24px 56px;
 `;
 
 export const FooterGrid = styled.div`
@@ -35,5 +35,3 @@ export const FooterGrid = styled.div`
   grid-area: footer;
   margin-top: 24px;
 `;
-
-export const Body = styled.div``;
