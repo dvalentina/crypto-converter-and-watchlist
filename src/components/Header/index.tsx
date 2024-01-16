@@ -9,11 +9,11 @@ function Header() {
 
   return (
     <Container>
-      <StyledLink href='/converter' chosen={pathname === '/converter'}>
+      <StyledLink href='/converter' $chosen={pathname === '/converter'}>
         Converter
       </StyledLink>
       <Divider />
-      <StyledLink href='/watchlist' chosen={pathname === '/watchlist'}>
+      <StyledLink href='/watchlist' $chosen={pathname === '/watchlist'}>
         Watchlist
       </StyledLink>
     </Container>

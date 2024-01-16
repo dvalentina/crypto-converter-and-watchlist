@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 interface IStyledLink {
-  chosen: boolean;
+  $chosen: boolean;
 }
 
 const turretRoad = Turret_Road({
@@ -25,7 +25,7 @@ export const StyledLink = styled(Link)<IStyledLink>`
   text-decoration: none;
   text-transform: lowercase;
   color: black;
-  font-weight: ${({ chosen }) => (chosen ? '500' : '300')};
+  font-weight: ${({ $chosen }) => ($chosen ? '500' : '300')};
 `;
 
 export const Divider = styled.div`
