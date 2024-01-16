@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-
+import Input from '@/components/Input';
 import SearchableDropdown from '@/components/SearchableDropdown';
 
-import { Container, Input } from './CurrencyCard.styled';
+import { Container } from './CurrencyCard.styled';
 
 interface ICurrencyCard {
   options: string[];
@@ -36,7 +35,7 @@ function CurrencyCard({
         value={value}
         readOnly={variant === 'output'}
         onChange={(event) => handleInputChange(event)}
-        min={0}
+        min='0'
       />
       <SearchableDropdown
         options={options}

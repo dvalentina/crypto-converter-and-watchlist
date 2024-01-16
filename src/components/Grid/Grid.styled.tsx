@@ -1,6 +1,12 @@
 'use client';
 
+import { Kay_Pho_Du } from 'next/font/google';
 import styled from 'styled-components';
+
+export const kayPhoDu = Kay_Pho_Du({
+  weight: ['400'],
+  subsets: ['latin'],
+});
 
 export const Container = styled.div`
   display: grid;
@@ -12,6 +18,7 @@ export const Container = styled.div`
   height: 100vh;
   grid-template-rows: auto 1fr auto;
   box-sizing: border-box;
+  font-family: ${kayPhoDu.style.fontFamily};
 `;
 
 export const HeaderGrid = styled.div`
@@ -21,6 +28,10 @@ export const HeaderGrid = styled.div`
 
 export const BodyGrid = styled.div`
   grid-area: body;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
 `;
 
 export const FooterGrid = styled.div`
@@ -30,8 +41,4 @@ export const FooterGrid = styled.div`
   margin-top: 24px;
 `;
 
-export const Body = styled.div`
-  display: grid;
-  gap: 12px;
-  grid-template-columns: auto 200px 200px 200px 200px auto;
-`;
+export const Body = styled.div``;

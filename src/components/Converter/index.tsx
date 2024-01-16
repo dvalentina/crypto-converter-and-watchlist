@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import useCurrencies from '@/hooks/useCurrencies';
 
+// import swapIcon from '@/images/swapIcon.svg';
 import CurrencyCard from '../CurrencyCard';
 
 import { Button, Container } from './Converter.styled';
@@ -14,9 +16,9 @@ function Converter() {
     limit: 100,
   });
 
-  const [inputCurrency, setInputCurrency] = useState('');
+  const [inputCurrency, setInputCurrency] = useState('Bitcoin');
   const [inputValue, setInputValue] = useState('1');
-  const [outputCurrency, setOutputCurrency] = useState('');
+  const [outputCurrency, setOutputCurrency] = useState('Ethereum');
   const [outputValue, setOutputValue] = useState('1');
 
   const [exchangeRate, setExchangeRate] = useState(1);
@@ -97,7 +99,9 @@ function Converter() {
         handleSelect={handleSelectInputCurrency}
         handleValueChange={handleInputValueChange}
       />
-      <Button onClick={handleSwitchCurrencies}>{'<>'}</Button>
+      <Button onClick={handleSwitchCurrencies}>
+        <Image src='images/swapIcon.svg' alt='swap' width={32} height={32} />
+      </Button>
       <CurrencyCard
         variant='output'
         options={options}
