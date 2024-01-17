@@ -2,20 +2,30 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Container, Divider, StyledLink } from './Header.styled';
+import { Container, Divider, Navigation, StyledLink } from './Header.styled';
 
 function Header() {
   const pathname = usePathname();
 
   return (
     <Container>
-      <StyledLink href='/converter' $chosen={pathname === '/converter'}>
-        Converter
-      </StyledLink>
-      <Divider />
-      <StyledLink href='/watchlist' $chosen={pathname === '/watchlist'}>
-        Watchlist
-      </StyledLink>
+      <Navigation>
+        <StyledLink
+          href='/converter'
+          $chosen={pathname === '/converter'}
+          $side='left'
+        >
+          Converter
+        </StyledLink>
+        <Divider />
+        <StyledLink
+          href='/watchlist'
+          $chosen={pathname === '/watchlist'}
+          $side='right'
+        >
+          Watchlist
+        </StyledLink>
+      </Navigation>
     </Container>
   );
 }
