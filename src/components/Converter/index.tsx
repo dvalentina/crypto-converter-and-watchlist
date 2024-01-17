@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 import useCurrencies from '@/hooks/useCurrencies';
 
-// import swapIcon from '@/images/swapIcon.svg';
 import CurrencyCard from '../CurrencyCard';
 
 import { Button, Container } from './Converter.styled';
