@@ -8,15 +8,16 @@ export const StyledButton = styled.button`
   border: 1px solid black;
   cursor: pointer;
   background: white;
+  font-size: ${({ theme }) => theme.fontSize.primary};
 
   &:hover {
     border: 2px solid;
-    border-image: linear-gradient(45deg, turquoise, mediumslateblue) 1;
+    border-image: ${({ theme }) => `${theme.gradient} 1`};
   }
 
   &:active {
     border: 3px solid;
-    border-image: linear-gradient(45deg, turquoise, mediumslateblue) 1;
+    border-image: ${({ theme }) => `${theme.gradient} 1`};
   }
 
   &:focus-visible {

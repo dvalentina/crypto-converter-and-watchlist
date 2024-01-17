@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import GlobalStyles from '@/components/GlobalStyles';
 import Grid from '@/components/Grid';
 import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
+import ThemeClient from '@/components/ThemeClient';
 
 export const metadata: Metadata = {
   title: 'CryptoRank Test Task',
@@ -18,8 +19,10 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <StyledComponentsRegistry>
-          <GlobalStyles />
-          <Grid>{children}</Grid>
+          <ThemeClient>
+            <GlobalStyles />
+            <Grid>{children}</Grid>
+          </ThemeClient>
         </StyledComponentsRegistry>
       </body>
     </html>

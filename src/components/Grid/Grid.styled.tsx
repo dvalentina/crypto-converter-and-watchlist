@@ -1,12 +1,6 @@
 'use client';
 
-import { Kay_Pho_Du } from 'next/font/google';
 import styled from 'styled-components';
-
-export const kayPhoDu = Kay_Pho_Du({
-  weight: ['400'],
-  subsets: ['latin'],
-});
 
 export const Container = styled.div`
   display: grid;
@@ -18,7 +12,7 @@ export const Container = styled.div`
   height: 100vh;
   grid-template-rows: auto 1fr auto;
   box-sizing: border-box;
-  font-family: ${kayPhoDu.style.fontFamily};
+  font-family: ${({ theme }) => theme.fontFamily.primary};
 `;
 
 export const HeaderGrid = styled.div`

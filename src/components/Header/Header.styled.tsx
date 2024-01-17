@@ -29,8 +29,8 @@ export const StyledLink = styled(Link)<IStyledLink>`
 `;
 
 export const Divider = styled.div`
-  border-left: 2px solid #38546d;
-  border-right: 2px solid #16222c;
+  border-left: 2px solid;
+  border-right: 2px solid;
   height: auto;
-  border-image: linear-gradient(45deg, turquoise, mediumslateblue) 1;
+  border-image: ${({ theme }) => `${theme.gradient} 1`};
 `;
