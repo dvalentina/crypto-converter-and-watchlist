@@ -6,8 +6,9 @@ import Image from 'next/image';
 import useCurrencies from '@/hooks/useCurrencies';
 
 import CurrencyCard from '../CurrencyCard';
+import IconButton from '../IconButton';
 
-import { Button, Container } from './Converter.styled';
+import { Container } from './Converter.styled';
 
 function Converter() {
   const { currencies, isError, isLoading } = useCurrencies({
@@ -98,9 +99,11 @@ function Converter() {
         handleSelect={handleSelectInputCurrency}
         handleValueChange={handleInputValueChange}
       />
-      <Button onClick={handleSwitchCurrencies}>
-        <Image src='images/swapIcon.svg' alt='swap' width={32} height={32} />
-      </Button>
+      <IconButton
+        onClick={handleSwitchCurrencies}
+        src='images/swapIcon.svg'
+        alt='swap'
+      />
       <CurrencyCard
         variant='output'
         options={options}

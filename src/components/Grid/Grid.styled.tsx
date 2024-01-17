@@ -13,6 +13,7 @@ export const Container = styled.div`
   grid-template-rows: auto 1fr auto;
   box-sizing: border-box;
   font-family: ${({ theme }) => theme.fontFamily.primary};
+  font-size: ${({ theme }) => theme.fontSize.primary};
 `;
 
 export const HeaderGrid = styled.div`

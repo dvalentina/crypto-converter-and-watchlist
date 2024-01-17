@@ -1,4 +1,6 @@
-import { Button, Container } from './Pagination.styled';
+import IconButton from '@/components/IconButton';
+
+import { Container } from './Pagination.styled';
 
 interface IPagination {
   handlePageIndexChange: (pageIndex: number) => void;
@@ -13,13 +15,17 @@ function Pagination({
 }: IPagination) {
   return (
     <Container>
-      <Button onClick={() => handlePageIndexChange(pageIndex - 1)}>
-        {'< Previous Page'}
-      </Button>
+      <IconButton
+        onClick={() => handlePageIndexChange(pageIndex - 1)}
+        src='images/previousIcon.svg'
+        alt='previous page'
+      />
       {pageIndex} of {maxPageIndex}
-      <Button onClick={() => handlePageIndexChange(pageIndex + 1)}>
-        {'Next Page >'}
-      </Button>
+      <IconButton
+        onClick={() => handlePageIndexChange(pageIndex + 1)}
+        src='images/nextIcon.svg'
+        alt='next page'
+      />
     </Container>
   );
 }

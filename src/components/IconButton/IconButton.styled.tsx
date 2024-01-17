@@ -8,7 +8,11 @@ export const StyledButton = styled.button`
   border: 1px solid black;
   cursor: pointer;
   background: white;
+  font-family: ${({ theme }) => theme.fontFamily.primary};
   font-size: ${({ theme }) => theme.fontSize.primary};
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
 
   &:hover {
     border: 2px solid;
