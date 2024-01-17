@@ -19,12 +19,14 @@ function Pagination({
         onClick={() => handlePageIndexChange(pageIndex - 1)}
         src='images/previousIcon.svg'
         alt='previous page'
+        disabled={pageIndex === 1 ? true : false}
       />
       {pageIndex} of {maxPageIndex}
       <IconButton
         onClick={() => handlePageIndexChange(pageIndex + 1)}
         src='images/nextIcon.svg'
         alt='next page'
+        disabled={pageIndex === maxPageIndex ? true : false}
       />
     </Container>
   );

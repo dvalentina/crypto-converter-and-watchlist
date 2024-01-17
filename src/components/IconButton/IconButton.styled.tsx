@@ -27,4 +27,9 @@ export const StyledButton = styled.button`
   &:focus-visible {
     outline: 1px solid black;
   }
+
+  &:disabled {
+    border: 1px solid black;
+    cursor: not-allowed;
+  }
 `;

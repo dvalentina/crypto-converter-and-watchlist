@@ -5,6 +5,7 @@ import { StyledButton } from './IconButton.styled';
 interface IButton {
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
   src: string;
   alt: string;
 }
