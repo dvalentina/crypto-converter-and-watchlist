@@ -1,4 +1,5 @@
-import Header from '../Header';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 import { BodyGrid, Container, FooterGrid, HeaderGrid } from './Grid.styled';
 
@@ -13,7 +14,9 @@ function Grid({ children }: IGrid) {
         <Header />
       </HeaderGrid>
       <BodyGrid>{children}</BodyGrid>
-      <FooterGrid></FooterGrid>
+      <FooterGrid>
+        <Footer />
+      </FooterGrid>
     </Container>
   );
 }
