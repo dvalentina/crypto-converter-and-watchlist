@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Card from '@/components/Card';
 
-interface IAlign {
-  $align?: 'right' | 'left';
+interface IColumn {
+  $number?: boolean;
 }
 
 export const Container = styled.div`
@@ -23,6 +23,7 @@ export const Table = styled.table`
   border: 1px solid black;
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 
   th,
   td {
@@ -30,13 +31,21 @@ export const Table = styled.table`
     height: 40px;
     padding-left: 8px;
     padding-right: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
-export const Th = styled.th<IAlign>`
-  text-align: ${({ $align }) => $align};
+const columnCSS = css<IColumn>`
+  text-align: ${({ $number }) => ($number ? 'right' : 'left')};
+  width: ${({ $number }) => ($number ? '180px' : 'unset')};
 `;
 
-export const Td = styled.td<IAlign>`
-  text-align: ${({ $align }) => $align};
+export const Th = styled.th<IColumn>`
+  ${columnCSS};
+`;
+
+export const Td = styled.td<IColumn>`
+  ${columnCSS};
 `;

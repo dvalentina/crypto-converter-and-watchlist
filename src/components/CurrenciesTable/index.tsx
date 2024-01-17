@@ -57,13 +57,13 @@ function CurrenciesTable() {
 
     return (
       <tr key={`currencies row ${index + 1}`}>
-        <Td $align='left'>{skeletonWrap(name)}</Td>
-        <Td $align='right'>{skeletonWrap(circulatingSupply)}</Td>
-        <Td $align='left'>{skeletonWrap(category)}</Td>
-        <Td $align='right'>{skeletonWrap(priceUSD)}</Td>
-        <Td $align='right'>{skeletonWrap(marketCapUSD)}</Td>
-        <Td $align='right'>{skeletonWrap(percentChange24h)}</Td>
-        <Td $align='right'>{skeletonWrap(percentChange7d)}</Td>
+        <Td>{skeletonWrap(name)}</Td>
+        <Td $number>{skeletonWrap(circulatingSupply)}</Td>
+        <Td>{skeletonWrap(category)}</Td>
+        <Td $number>{skeletonWrap(priceUSD)}</Td>
+        <Td $number>{skeletonWrap(marketCapUSD)}</Td>
+        <Td $number>{skeletonWrap(percentChange24h)}</Td>
+        <Td $number>{skeletonWrap(percentChange7d)}</Td>
       </tr>
     );
   });
@@ -74,13 +74,13 @@ function CurrenciesTable() {
         <Table>
           <thead>
             <tr>
-              <Th $align='left'>Name</Th>
-              <Th $align='right'>Circulating supply</Th>
-              <Th $align='left'>Category</Th>
-              <Th $align='right'>Price</Th>
-              <Th $align='right'>Market cap</Th>
-              <Th $align='right'>% change, 24 hours</Th>
-              <Th $align='right'>% change, 7 days</Th>
+              <Th>Name</Th>
+              <Th $number>Circulating supply</Th>
+              <Th>Category</Th>
+              <Th $number>Price</Th>
+              <Th $number>Market cap</Th>
+              <Th $number>% change, 24h</Th>
+              <Th $number>% change, 7d</Th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
