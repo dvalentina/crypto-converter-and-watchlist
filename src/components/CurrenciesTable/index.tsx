@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import Pagination from '@/components/Pagination';
 import useCurrencies from '@/hooks/useCurrencies';
+import { formatNumberToSI } from '@/utils';
 
 import TextSkeleton from '../TextSkeleton';
 
@@ -42,15 +43,27 @@ function CurrenciesTable() {
     const currency = currencies?.data[index];
     const valuesUSD = currency?.values.USD;
 
+    const name = currency?.name;
+    const circulatingSupply = formatNumberToSI({
+      value: currency?.circulatingSupply,
+    });
+    const category = currency?.category;
+    const priceUSD = `$${formatNumberToSI({ value: valuesUSD?.price })}`;
+    const marketCapUSD = `$${formatNumberToSI({
+      value: valuesUSD?.marketCap,
+    })}`;
+    const percentChange24h = valuesUSD?.percentChange24h;
+    const percentChange7d = valuesUSD?.percentChange7d;
+
     return (
       <tr key={`currencies row ${index + 1}`}>
-        <Td $align='left'>{skeletonWrap(currency?.name)}</Td>
-        <Td $align='right'>{skeletonWrap(currency?.circulatingSupply)}</Td>
-        <Td $align='left'>{skeletonWrap(currency?.category)}</Td>
-        <Td $align='right'>{skeletonWrap(valuesUSD?.price)}</Td>
-        <Td $align='right'>{skeletonWrap(valuesUSD?.marketCap)}</Td>
-        <Td $align='right'>{skeletonWrap(valuesUSD?.percentChange24h)}</Td>
-        <Td $align='right'>{skeletonWrap(valuesUSD?.percentChange7d)}</Td>
+        <Td $align='left'>{skeletonWrap(name)}</Td>
+        <Td $align='right'>{skeletonWrap(circulatingSupply)}</Td>
+        <Td $align='left'>{skeletonWrap(category)}</Td>
+        <Td $align='right'>{skeletonWrap(priceUSD)}</Td>
+        <Td $align='right'>{skeletonWrap(marketCapUSD)}</Td>
+        <Td $align='right'>{skeletonWrap(percentChange24h)}</Td>
+        <Td $align='right'>{skeletonWrap(percentChange7d)}</Td>
       </tr>
     );
   });
@@ -64,7 +77,7 @@ function CurrenciesTable() {
               <Th $align='left'>Name</Th>
               <Th $align='right'>Circulating supply</Th>
               <Th $align='left'>Category</Th>
-              <Th $align='right'>Price (USD)</Th>
+              <Th $align='right'>Price</Th>
               <Th $align='right'>Market cap</Th>
               <Th $align='right'>% change, 24 hours</Th>
               <Th $align='right'>% change, 7 days</Th>
