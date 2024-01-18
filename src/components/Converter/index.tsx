@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 import useCurrencies from '@/hooks/useCurrencies';
+import { formatNumberToSI } from '@/utils';
 
 import CurrencyCard from '../CurrencyCard';
 import IconButton from '../IconButton';
@@ -65,7 +65,7 @@ function Converter() {
 
   useEffect(() => {
     calculateExchangeRate();
-  }, [inputCurrency, outputCurrency]);
+  }, [inputCurrency, outputCurrency, isLoading]);
 
   const handleSwitchCurrencies = () => {
     const prevInputCurrency = inputCurrency;
@@ -108,7 +108,10 @@ function Converter() {
         variant='output'
         options={options}
         selected={outputCurrency}
-        value={outputValue}
+        value={formatNumberToSI({
+          value: parseFloat(outputValue),
+          precision: 3,
+        })}
         handleSelect={handleSelectOutputCurrency}
       />
     </Container>

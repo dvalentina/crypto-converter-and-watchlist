@@ -52,9 +52,11 @@ function CurrenciesTable() {
     const valuesUSD = currency?.values.USD;
 
     const name = currency?.name;
-    const circulatingSupply = formatNumberToSI({
-      value: currency?.circulatingSupply,
-    });
+    const circulatingSupply = currency?.circulatingSupply
+      ? formatNumberToSI({
+          value: currency?.circulatingSupply,
+        })
+      : '-';
     const category = currency?.category;
     const priceUSD = formatPrice(valuesUSD?.price);
     const marketCapUSD = formatPrice(valuesUSD?.marketCap);

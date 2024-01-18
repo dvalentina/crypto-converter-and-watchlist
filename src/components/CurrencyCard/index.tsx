@@ -30,7 +30,7 @@ function CurrencyCard({
   return (
     <Card>
       <Input
-        type='number'
+        type={variant === 'output' ? 'text' : 'number'}
         value={value}
         readOnly={variant === 'output'}
         onChange={(event) => handleInputChange(event)}

@@ -59,15 +59,11 @@ export function calculateAllHistoricalPrices({
 }
 
 interface IFormatNumberToSI {
-  value?: number;
+  value: number;
   precision?: number;
 }
 
 export function formatNumberToSI({ value, precision = 2 }: IFormatNumberToSI) {
-  if (value === undefined) {
-    return;
-  }
-
   const map = [
     { suffix: 'T', threshold: 1e12 },
     { suffix: 'B', threshold: 1e9 },
@@ -85,6 +81,10 @@ export function formatNumberToSI({ value, precision = 2 }: IFormatNumberToSI) {
 
   if (value >= 1e-2) {
     return value.toPrecision(precision);
+  }
+
+  if (value === 0) {
+    return '0';
   }
 
   return value.toExponential(precision);
