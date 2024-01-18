@@ -27,8 +27,11 @@ interface ICurrencyValues {
 interface ICurrencyValue {
   price: number;
   marketCap: number;
-  percentChange24h: number;
-  percentChange7d: number;
+  percentChange24h?: number;
+  percentChange7d?: number;
+  percentChange30d?: number;
+  percentChange3m?: number;
+  percentChange6m?: number;
 }
 
 const fetcher = (URL: string) => fetch(URL).then((res) => res.json());

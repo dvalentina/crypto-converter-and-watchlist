@@ -31,21 +31,22 @@ export const Table = styled.table`
     height: 40px;
     padding-left: 8px;
     padding-right: 8px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 `;
 
 const columnCSS = css<IColumn>`
   text-align: ${({ $number }) => ($number ? 'right' : 'left')};
-  width: ${({ $number }) => ($number ? '180px' : 'unset')};
+  width: ${({ $number }) => ($number ? '110px' : 'unset')};
 `;
 
 export const Th = styled.th<IColumn>`
   ${columnCSS};
+  vertical-align: bottom;
 `;
 
 export const Td = styled.td<IColumn>`
   ${columnCSS};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

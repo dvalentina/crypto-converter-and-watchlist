@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Pagination from '@/components/Pagination';
 import useCurrencies from '@/hooks/useCurrencies';
-import { formatNumberToSI } from '@/utils';
+import { calculateAllHistoricalPrices, formatNumberToSI } from '@/utils';
 
 import TextSkeleton from '../TextSkeleton';
 
@@ -39,6 +39,14 @@ function CurrenciesTable() {
     return isLoading ? <TextSkeleton /> : text;
   };
 
+  const formatPrice = (price?: number) => {
+    return price
+      ? `$${formatNumberToSI({
+          value: price,
+        })}`
+      : '-';
+  };
+
   const rows = Array.from(Array(limit)).map((el, index) => {
     const currency = currencies?.data[index];
     const valuesUSD = currency?.values.USD;
@@ -48,22 +56,42 @@ function CurrenciesTable() {
       value: currency?.circulatingSupply,
     });
     const category = currency?.category;
-    const priceUSD = `$${formatNumberToSI({ value: valuesUSD?.price })}`;
-    const marketCapUSD = `$${formatNumberToSI({
-      value: valuesUSD?.marketCap,
-    })}`;
-    const percentChange24h = valuesUSD?.percentChange24h;
-    const percentChange7d = valuesUSD?.percentChange7d;
+    const priceUSD = formatPrice(valuesUSD?.price);
+    const marketCapUSD = formatPrice(valuesUSD?.marketCap);
+
+    const {
+      historicalPrice24h,
+      historicalPrice7d,
+      historicalPrice30d,
+      historicalPrice3m,
+      historicalPrice6m,
+    } = calculateAllHistoricalPrices({
+      price: valuesUSD?.price,
+      percentChange24h: valuesUSD?.percentChange24h,
+      percentChange7d: valuesUSD?.percentChange7d,
+      percentChange30d: valuesUSD?.percentChange30d,
+      percentChange3m: valuesUSD?.percentChange3m,
+      percentChange6m: valuesUSD?.percentChange6m,
+    });
+
+    const formattedPrice24h = formatPrice(historicalPrice24h);
+    const formattedPrice7d = formatPrice(historicalPrice7d);
+    const formattedPrice30d = formatPrice(historicalPrice30d);
+    const formattedPrice3m = formatPrice(historicalPrice3m);
+    const formattedPrice6m = formatPrice(historicalPrice6m);
 
     return (
       <tr key={`currencies row ${index + 1}`}>
         <Td>{skeletonWrap(name)}</Td>
-        <Td $number>{skeletonWrap(circulatingSupply)}</Td>
-        <Td>{skeletonWrap(category)}</Td>
         <Td $number>{skeletonWrap(priceUSD)}</Td>
+        <Td $number>{skeletonWrap(circulatingSupply)}</Td>
         <Td $number>{skeletonWrap(marketCapUSD)}</Td>
-        <Td $number>{skeletonWrap(percentChange24h)}</Td>
-        <Td $number>{skeletonWrap(percentChange7d)}</Td>
+        <Td>{skeletonWrap(category)}</Td>
+        <Td $number>{skeletonWrap(formattedPrice24h)}</Td>
+        <Td $number>{skeletonWrap(formattedPrice7d)}</Td>
+        <Td $number>{skeletonWrap(formattedPrice30d)}</Td>
+        <Td $number>{skeletonWrap(formattedPrice3m)}</Td>
+        <Td $number>{skeletonWrap(formattedPrice6m)}</Td>
       </tr>
     );
   });
@@ -75,12 +103,15 @@ function CurrenciesTable() {
           <thead>
             <tr>
               <Th>Name</Th>
-              <Th $number>Circulating supply</Th>
-              <Th>Category</Th>
               <Th $number>Price</Th>
+              <Th $number>Circulating supply</Th>
               <Th $number>Market cap</Th>
-              <Th $number>% change, 24h</Th>
-              <Th $number>% change, 7d</Th>
+              <Th>Category</Th>
+              <Th $number>Historical price, 24h</Th>
+              <Th $number>Historical price, 7d</Th>
+              <Th $number>Historical price, 30d</Th>
+              <Th $number>Historical price, 3m</Th>
+              <Th $number>Historical price, 6m</Th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
