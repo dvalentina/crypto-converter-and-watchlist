@@ -113,7 +113,7 @@ function Converter() {
         options={options}
         selected={outputCurrency}
         value={formatNumberToSI({
-          value: parseFloat(outputValue),
+          value: outputValue,
           precision: 3,
         })}
         handleSelect={handleSelectOutputCurrency}
