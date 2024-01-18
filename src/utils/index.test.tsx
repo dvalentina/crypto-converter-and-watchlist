@@ -1,4 +1,4 @@
-import { calculateHistoricalPrice } from '.';
+import { calculateHistoricalPrice, formatNumberToSI } from '.';
 
 describe('test calculateHistoricalPrice function', () => {
   // [current price, percent change, expected historical price]
@@ -24,6 +24,37 @@ describe('test calculateHistoricalPrice function', () => {
       if (result) {
         expect(parseFloat(result)).toBeCloseTo(parseFloat(expectedResult));
       }
+    }
+  );
+});
+
+describe('test formatNumberToSI', () => {
+  const cases = [
+    ['765400300200100', '765.40T'],
+    ['1000000000000', '1.00T'],
+    ['5364900000', '5.36B'],
+    ['1000000000', '1.00B'],
+    ['1e9', '1.00B'],
+    ['88765432', '88.77M'],
+    ['1000000', '1.00M'],
+    ['8080', '8.08K'],
+    ['1000', '1.00K'],
+    ['23.2323', '23.23'],
+    ['1', '1.00'],
+    ['0.0679', '0.068'],
+    ['0', '0'],
+    ['0.0679', '0.068'],
+    ['0.0679', '0.068'],
+    ['6.79e-6', '6.79e-6'],
+    ['0.00000679', '6.79e-6'],
+  ];
+
+  test.each(cases)(
+    'given %p as a value, result is equal to %p',
+    (value, expectedResult) => {
+      const result = formatNumberToSI({ value: value });
+
+      expect(result).toBe(expectedResult);
     }
   );
 });
