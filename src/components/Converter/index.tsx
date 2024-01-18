@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Big from 'big.js';
 
 import useCurrencies from '@/hooks/useCurrencies';
 import { formatNumberToSI } from '@/utils';
@@ -21,11 +22,11 @@ function Converter() {
   const [outputCurrency, setOutputCurrency] = useState('Ethereum');
   const [outputValue, setOutputValue] = useState('1');
 
-  const [exchangeRate, setExchangeRate] = useState(1);
+  const [exchangeRate, setExchangeRate] = useState('1');
 
   const calculateExchangeRate = () => {
     if (inputCurrency === outputCurrency) {
-      setExchangeRate(1);
+      setExchangeRate('1');
       return;
     }
 
@@ -41,7 +42,10 @@ function Converter() {
       return;
     }
 
-    setExchangeRate(inputPriceUSD / outputPriceUSD);
+    const inputPriceUSDBig = new Big(inputPriceUSD);
+    const outputPriceUSDBig = new Big(outputPriceUSD);
+
+    setExchangeRate(inputPriceUSDBig.div(outputPriceUSDBig).toString());
   };
 
   const handleSelectInputCurrency = (option: string) => {
@@ -57,10 +61,10 @@ function Converter() {
   };
 
   useEffect(() => {
-    const inputNumber = parseFloat(inputValue);
-    const outputNumber = inputNumber * exchangeRate;
-    const outputValue = outputNumber.toString();
-    setOutputValue(outputValue);
+    const inputValueBig = new Big(inputValue);
+    const exchangeRateBig = new Big(exchangeRate);
+    const outputValueBig = inputValueBig.times(exchangeRateBig);
+    setOutputValue(outputValueBig.toString());
   }, [inputValue, exchangeRate]);
 
   useEffect(() => {

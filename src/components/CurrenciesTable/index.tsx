@@ -39,7 +39,7 @@ function CurrenciesTable() {
     return isLoading ? <TextSkeleton /> : text;
   };
 
-  const formatPrice = (price?: number) => {
+  const formatPrice = (price?: string) => {
     return price
       ? `$${formatNumberToSI({
           value: price,
@@ -54,12 +54,12 @@ function CurrenciesTable() {
     const name = currency?.name;
     const circulatingSupply = currency?.circulatingSupply
       ? formatNumberToSI({
-          value: currency?.circulatingSupply,
+          value: currency?.circulatingSupply.toString(),
         })
       : '-';
     const category = currency?.category;
-    const priceUSD = formatPrice(valuesUSD?.price);
-    const marketCapUSD = formatPrice(valuesUSD?.marketCap);
+    const priceUSD = formatPrice(valuesUSD?.price.toString());
+    const marketCapUSD = formatPrice(valuesUSD?.marketCap.toString());
 
     const {
       historicalPrice24h,
@@ -68,12 +68,12 @@ function CurrenciesTable() {
       historicalPrice3m,
       historicalPrice6m,
     } = calculateAllHistoricalPrices({
-      price: valuesUSD?.price,
-      percentChange24h: valuesUSD?.percentChange24h,
-      percentChange7d: valuesUSD?.percentChange7d,
-      percentChange30d: valuesUSD?.percentChange30d,
-      percentChange3m: valuesUSD?.percentChange3m,
-      percentChange6m: valuesUSD?.percentChange6m,
+      price: valuesUSD?.price.toString(),
+      percentChange24h: valuesUSD?.percentChange24h?.toString(),
+      percentChange7d: valuesUSD?.percentChange7d?.toString(),
+      percentChange30d: valuesUSD?.percentChange30d?.toString(),
+      percentChange3m: valuesUSD?.percentChange3m?.toString(),
+      percentChange6m: valuesUSD?.percentChange6m?.toString(),
     });
 
     const formattedPrice24h = formatPrice(historicalPrice24h);

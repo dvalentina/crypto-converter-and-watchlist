@@ -1,15 +1,17 @@
+import Big from 'big.js';
+
 interface IAllHistoricalPrices {
-  price?: number;
-  percentChange24h?: number;
-  percentChange7d?: number;
-  percentChange30d?: number;
-  percentChange3m?: number;
-  percentChange6m?: number;
+  price?: string;
+  percentChange24h?: string;
+  percentChange7d?: string;
+  percentChange30d?: string;
+  percentChange3m?: string;
+  percentChange6m?: string;
 }
 
 interface IHistoricalPrice {
-  price?: number;
-  percentChange?: number;
+  price?: string;
+  percentChange?: string;
 }
 
 export function calculateHistoricalPrice({
@@ -19,8 +21,14 @@ export function calculateHistoricalPrice({
   if (price === undefined || percentChange === undefined) {
     return undefined;
   }
-  const historicalPrice = (price * 100) / (100 + percentChange);
-  return historicalPrice;
+
+  const priceBig = new Big(price);
+  const percentChangeBig = new Big(percentChange);
+
+  const historicalPriceBig = priceBig
+    .times(100)
+    .div(percentChangeBig.plus(100));
+  return historicalPriceBig.toString();
 }
 
 export function calculateAllHistoricalPrices({
@@ -62,33 +70,35 @@ export function calculateAllHistoricalPrices({
 }
 
 interface IFormatNumberToSI {
-  value: number;
+  value: string;
   precision?: number;
 }
 
 export function formatNumberToSI({ value, precision = 2 }: IFormatNumberToSI) {
   const map = [
-    { suffix: 'T', threshold: 1e12 },
-    { suffix: 'B', threshold: 1e9 },
-    { suffix: 'M', threshold: 1e6 },
-    { suffix: 'K', threshold: 1e3 },
-    { suffix: '', threshold: 1 },
+    { suffix: 'T', threshold: '1e12' },
+    { suffix: 'B', threshold: '1e9' },
+    { suffix: 'M', threshold: '1e6' },
+    { suffix: 'K', threshold: '1e3' },
+    { suffix: '', threshold: '1' },
   ];
 
-  const found = map.find((x) => Math.abs(value) >= x.threshold);
+  const valueBig = new Big(value);
+
+  const found = map.find((x) => valueBig.abs().gte(x.threshold));
   if (found) {
     const formatted =
-      (value / found.threshold).toFixed(precision) + found.suffix;
+      valueBig.div(found.threshold).toFixed(precision) + found.suffix;
     return formatted;
   }
 
-  if (value >= 1e-2) {
-    return value.toPrecision(precision);
+  if (valueBig.gte('1e-2')) {
+    return valueBig.toPrecision(precision);
   }
 
-  if (value === 0) {
+  if (valueBig.eq('0')) {
     return '0';
   }
 
-  return value.toExponential(precision);
+  return valueBig.toExponential(precision);
 }
