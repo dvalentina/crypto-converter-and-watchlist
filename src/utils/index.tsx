@@ -12,7 +12,10 @@ interface IHistoricalPrice {
   percentChange?: number;
 }
 
-function calculateHistoricalPrice({ price, percentChange }: IHistoricalPrice) {
+export function calculateHistoricalPrice({
+  price,
+  percentChange,
+}: IHistoricalPrice) {
   if (price === undefined || percentChange === undefined) {
     return undefined;
   }
