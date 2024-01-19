@@ -6,8 +6,8 @@ import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
 import ThemeClient from '@/components/ThemeClient';
 
 export const metadata: Metadata = {
-  title: 'CryptoRank Test Task',
-  description: 'An application for a test assignment',
+  title: 'Crypto Converter and Watchlist',
+  description: 'An application built with CryptoRank API',
 };
 
 export default function RootLayout({
