@@ -84,7 +84,7 @@ function CurrenciesTable() {
 
     return (
       <tr key={`currencies row ${index + 1}`}>
-        <Td>{skeletonWrap(name)}</Td>
+        <Td data-testid='table-currency-name'>{skeletonWrap(name)}</Td>
         <Td $number>{skeletonWrap(priceUSD)}</Td>
         <Td $number>{skeletonWrap(circulatingSupply)}</Td>
         <Td $number>{skeletonWrap(marketCapUSD)}</Td>
@@ -101,7 +101,7 @@ function CurrenciesTable() {
   return (
     <Container>
       <StyledCard>
-        <Table>
+        <Table data-testid='currencies-table'>
           <thead>
             <tr>
               <Th>Name</Th>
