@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Pagination from '@/components/Pagination';
 import useCurrencies from '@/hooks/useCurrencies';
@@ -12,6 +12,7 @@ import { Container, StyledCard, Table, Td, Th } from './CurrenciesTable.styled';
 
 function CurrenciesTable() {
   const [pageIndex, setPageIndex] = useState(1);
+  const [maxPageIndex, setMaxPageIndex] = useState(1);
   const limit = 10;
 
   const { currencies, isError, isLoading } = useCurrencies({
@@ -19,13 +20,19 @@ function CurrenciesTable() {
     limit,
   });
 
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      const count = currencies?.meta.count;
+      if (count) {
+        setMaxPageIndex(Math.ceil(count / limit));
+      }
+    }
+  }, [currencies, isLoading, isError]);
+
   if (isError) {
     console.log(isError);
     return <p>error</p>;
   }
-
-  const count = currencies?.meta.count;
-  const maxPageIndex = count ? Math.ceil(count / limit) : 1;
 
   const handlePageChange = (newPageIndex: number) => {
     if (newPageIndex < 1 || newPageIndex > maxPageIndex) {
