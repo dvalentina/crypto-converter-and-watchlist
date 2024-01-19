@@ -8,11 +8,12 @@ interface IButton {
   disabled?: boolean;
   src: string;
   alt: string;
+  dataTestId?: string;
 }
 
-function IconButton({ src, alt, ...attrs }: IButton) {
+function IconButton({ src, alt, dataTestId, ...attrs }: IButton) {
   return (
-    <StyledButton {...attrs}>
+    <StyledButton data-testid={dataTestId} {...attrs}>
       <Image src={src} alt={alt} width={32} height={32} />
     </StyledButton>
   );

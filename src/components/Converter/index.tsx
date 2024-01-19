@@ -102,11 +102,13 @@ function Converter() {
         value={inputValue}
         handleSelect={handleSelectInputCurrency}
         handleValueChange={handleInputValueChange}
+        dataTestId='input-card'
       />
       <IconButton
         onClick={handleSwitchCurrencies}
         src='images/swapIcon.svg'
         alt='swap'
+        dataTestId='switch-button'
       />
       <CurrencyCard
         variant='output'
@@ -117,6 +119,7 @@ function Converter() {
           precision: 3,
         })}
         handleSelect={handleSelectOutputCurrency}
+        dataTestId='output-card'
       />
     </Container>
   );

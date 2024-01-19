@@ -8,12 +8,14 @@ interface ISearchableDropdown {
   options: string[];
   selected: string;
   handleSelect: (option: string) => void;
+  dataTestId?: string;
 }
 
 function SearchableDropdown({
   options,
   selected,
   handleSelect,
+  dataTestId,
 }: ISearchableDropdown) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -55,7 +57,11 @@ function SearchableDropdown({
   };
 
   const optionsComponents = filterOptions(options).map((option) => (
-    <Option key={option} onClick={() => handleOptionClick(option)}>
+    <Option
+      key={option}
+      onClick={() => handleOptionClick(option)}
+      data-testid='option'
+    >
       {option}
     </Option>
   ));
@@ -74,6 +80,7 @@ function SearchableDropdown({
         onChange={(event) => handleInputChange(event)}
         readOnly={!isOpen}
         placeholder='type here to search'
+        data-testid={dataTestId}
       />
       {isOpen ? (
         <List>

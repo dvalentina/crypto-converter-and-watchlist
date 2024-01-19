@@ -5,10 +5,15 @@ import { Container } from './Card.styled';
 interface ICard {
   children?: React.ReactNode;
   className?: string;
+  dataTestId?: string;
 }
 
-function Card({ children, className }: ICard) {
-  return <Container className={className}>{children}</Container>;
+function Card({ children, className, dataTestId }: ICard) {
+  return (
+    <Container className={className} data-testid={dataTestId}>
+      {children}
+    </Container>
+  );
 }
 
 export default Card;

@@ -11,8 +11,10 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@testing-library/user-event": "^14.5.2",
     "big.js": "^6.2.1",
     "next": "14.0.4",
+    "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.8",
@@ -27,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-fetch": "^4.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^9.1.0",
