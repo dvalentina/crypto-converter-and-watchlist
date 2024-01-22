@@ -12,6 +12,7 @@ interface ICurrencyCard {
   variant: 'input' | 'output';
   handleValueChange?: (value: string) => void;
   dataTestId?: string;
+  valueError?: string;
 }
 
 function CurrencyCard({
@@ -22,6 +23,7 @@ function CurrencyCard({
   variant,
   handleValueChange,
   dataTestId,
+  valueError,
 }: ICurrencyCard) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (handleValueChange) {
@@ -38,6 +40,7 @@ function CurrencyCard({
         onChange={(event) => handleInputChange(event)}
         min='0'
         data-testid='currency-value'
+        errorText={valueError}
       />
       <SearchableDropdown
         options={options}

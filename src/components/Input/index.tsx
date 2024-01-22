@@ -1,4 +1,4 @@
-import { StyledInput } from './Input.styled';
+import { Container, ErrorText, StyledInput } from './Input.styled';
 
 interface IInput {
   className?: string;
@@ -10,10 +10,16 @@ interface IInput {
   value?: string;
   readOnly?: boolean;
   min?: string;
+  errorText?: string;
 }
 
-function Input({ ...attrs }: IInput) {
-  return <StyledInput {...attrs} />;
+function Input({ errorText, ...attrs }: IInput) {
+  return (
+    <Container>
+      {errorText ? <ErrorText>{errorText}</ErrorText> : null}
+      <StyledInput $error={!!errorText} {...attrs} />
+    </Container>
+  );
 }
 
 export default Input;

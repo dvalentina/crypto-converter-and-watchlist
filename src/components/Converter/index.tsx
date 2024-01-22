@@ -11,6 +11,10 @@ import IconButton from '../IconButton';
 
 import { Container } from './Converter.styled';
 
+interface IError {
+  message: string;
+}
+
 function Converter() {
   const { currencies, isError, isLoading } = useCurrencies({
     pageIndex: 1,
@@ -21,6 +25,7 @@ function Converter() {
   const [inputValue, setInputValue] = useState('1');
   const [outputCurrency, setOutputCurrency] = useState('Ethereum');
   const [outputValue, setOutputValue] = useState('1');
+  const [inputValueError, setInputValueError] = useState('');
 
   const [exchangeRate, setExchangeRate] = useState('1');
 
@@ -61,10 +66,17 @@ function Converter() {
   };
 
   useEffect(() => {
-    const inputValueBig = new Big(inputValue);
-    const exchangeRateBig = new Big(exchangeRate);
-    const outputValueBig = inputValueBig.times(exchangeRateBig);
-    setOutputValue(outputValueBig.toString());
+    setInputValueError('');
+
+    try {
+      const inputValueBig = new Big(inputValue);
+      const exchangeRateBig = new Big(exchangeRate);
+      const outputValueBig = inputValueBig.times(exchangeRateBig);
+      setOutputValue(outputValueBig.toString());
+    } catch (_error) {
+      const error = _error as IError;
+      setInputValueError(error.message.replace('[big.js]', '').trim());
+    }
   }, [inputValue, exchangeRate]);
 
   useEffect(() => {
@@ -103,6 +115,7 @@ function Converter() {
         handleSelect={handleSelectInputCurrency}
         handleValueChange={handleInputValueChange}
         dataTestId='input-card'
+        valueError={inputValueError}
       />
       <IconButton
         onClick={handleSwitchCurrencies}

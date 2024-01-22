@@ -9,9 +9,13 @@ const theme = {
   gradient: 'linear-gradient(45deg, turquoise, mediumslateblue)',
   fontSize: {
     primary: '20px',
+    error: '16px',
   },
   fontFamily: {
     primary: kayPhoDu.style.fontFamily,
+  },
+  colors: {
+    error: 'lightcoral',
   },
 };
 
